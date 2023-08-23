@@ -90,11 +90,33 @@ function load() {
 
 //function to close the pop-up window of an event after saving or cancelling it
 function closeModal() {
+    eventTitleInput.classList.remove('error');
     newEventModal.style.display = 'none';
     backDrop.style.display = 'none';
     eventTitleInput.value = '';
     clicked = null;
     load();
+}
+
+//function to save an event
+function saveEvent() {
+    if (eventTitleInput.value) {
+        eventTitleInput.classList.remove('error');
+
+        events.push({
+            date: clicked,
+            title: eventTitleInput.value,
+            //time: 
+            //location:
+        });
+
+        localStorage.setItem('events', JSON.stringify(events));
+
+        closeModal();
+
+    } else {
+        eventTitleInput.classList.add('error');
+    }
 }
 
 //function to make the buttons work. next button increments the page to the next month
